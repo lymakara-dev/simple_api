@@ -3,8 +3,7 @@ import { IsString, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 export class CreateMapDto {
   @IsString()
   @IsNotEmpty()
-  name: string; // Name of the map
-
+  name: string;
   @IsString()
   @IsOptional()
   description?: string; // Optional description
