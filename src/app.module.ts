@@ -11,6 +11,7 @@ import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { RiderReviewModule } from './rider-review/rider-review.module';
 import { MapModule } from './map/map.module';
+import { ChatModule } from './chat/chat.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -37,6 +38,7 @@ const ENV = process.env.NODE_ENV;
     ProductsModule,
     RiderReviewModule,
     MapModule,
+    ChatModule,
   ],
   controllers: [AppController],
   providers: [AppService],
