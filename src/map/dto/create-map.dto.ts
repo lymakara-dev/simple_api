@@ -4,19 +4,19 @@ export class CreateMapDto {
   @IsString()
   @IsNotEmpty()
   name: string;
+  
   @IsString()
   @IsOptional()
-  description?: string; // Optional description
+  description?: string; 
 
   @IsNumber()
   @IsNotEmpty()
-  zoomLevel: number; // Zoom level of the map
+  zoomLevel: number;
 
   @IsNumber()
   @IsNotEmpty()
-  latitude: number; // Latitude coordinate
+  latitude: number; 
 
   @IsNumber()
   @IsNotEmpty()
-  longitude: number; // Longitude coordinate
-}
+  longitude: number;
