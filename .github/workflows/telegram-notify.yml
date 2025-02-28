@@ -1,15 +1,17 @@
-name: Notify Telegram on Push
+name: Notify Telegram on GitHub Events
 
 on:
   push:
-    branches: # This will trigger the workflow on any branch push
-      - '**' # Matches all branches
+    branches:
+      - '**' # Trigger on push to any branch
   pull_request:
-    branches: # This will trigger the workflow on pull request events for all branches
-      - '**' # Matches all branches
-  issue_comment: # This will notify on issue comments (optional)
-  issues: # This will notify on issues opened/closed (optional)
-  create: # This will notify when a branch or tag is created (optional)
+    branches:
+      - '**' # Trigger on pull request for any branch
+  issue_comment:
+    types: [created] # Trigger on issue comment creation (optional)
+  issues:
+    types: [opened, closed] # Trigger on issue opened or closed (optional)
+  create: # Trigger on new branch creation (optional)
 
 jobs:
   notify:
@@ -19,4 +21,6 @@ jobs:
         run: |
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -H "Content-Type: application/json" \
-          -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "🚀 New push to main branch!\nRepo: ${{ github.repository }}\nCommit: ${{ github.event.head_commit.message }}"}'
+          -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "🚨 Event Triggered:\n\nEvent: ${{ github.event_name }}\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref }}\nCommit: ${{ github.event.head_commit.message }}\nCommit Author: ${{ github.event.head_commit.author.name }}\n\nDetails:\n${
+              github.event_name == 'push' && github.event.head_commit.message ? "Commit message: " + github.event.head_commit.message : 'No commit message available'
+            }\n\nTriggered by: ${{ github.actor }}\nAction: ${{ github.event_name }}\n\nFull Event Payload: ${{ toJson(github.event) }}"}'
