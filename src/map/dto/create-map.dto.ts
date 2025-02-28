@@ -4,10 +4,10 @@ export class CreateMapDto {
   @IsString()
   @IsNotEmpty()
   name: string;
-  
+
   @IsString()
   @IsOptional()
-  description?: string; 
+  description?: string;
 
   @IsNumber()
   @IsNotEmpty()
@@ -15,8 +15,9 @@ export class CreateMapDto {
 
   @IsNumber()
   @IsNotEmpty()
-  latitude: number; 
+  latitude: number;
 
   @IsNumber()
   @IsNotEmpty()
   longitude: number;
+}
