@@ -10,6 +10,7 @@ import { DeliveryModule } from './delivery/delivery.module';
 import { OrdersModule } from './orders/orders.module';
 import { ProductsModule } from './products/products.module';
 import { RiderReviewModule } from './rider-review/rider-review.module';
+import { MapModule } from './map/map.module';
 
 const ENV = process.env.NODE_ENV;
 
@@ -35,6 +36,7 @@ const ENV = process.env.NODE_ENV;
     OrdersModule,
     ProductsModule,
     RiderReviewModule,
+    MapModule,
   ],
   controllers: [AppController],
   providers: [AppService],
