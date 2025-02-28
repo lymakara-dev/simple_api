@@ -22,7 +22,10 @@ jobs:
           # Check if it's a push event and get the commit message
           COMMIT_MESSAGE="${{ github.event.head_commit.message || 'No commit message available' }}"
 
+          # Format the message with Markdown
+          MESSAGE="*🚨 Event Triggered:*\n\n*Event:* \`${{ github.event_name }}\`\n*Repository:* \`${{ github.repository }}\`\n*Branch:* \`${{ github.ref }}\`\n*Commit:* \`${COMMIT_MESSAGE}\`\n*Commit Author:* \`${{ github.event.head_commit.author.name }}\`\n\n*Triggered by:* \`${{ github.actor }}\`\n*Action:* \`${{ github.event_name }}\`"
+
           # Send the notification
           curl -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
           -H "Content-Type: application/json" \
-          -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "🚨 Event Triggered:\n\nEvent: ${{ github.event_name }}\nRepository: ${{ github.repository }}\nBranch: ${{ github.ref }}\nCommit: '${COMMIT_MESSAGE}'\nCommit Author: ${{ github.event.head_commit.author.name }}\n\nTriggered by: ${{ github.actor }}\nAction: ${{ github.event_name }}"}'
+          -d '{"chat_id": "${{ secrets.TELEGRAM_CHAT_ID }}", "text": "'"$MESSAGE"'", "parse_mode": "Markdown"}'
